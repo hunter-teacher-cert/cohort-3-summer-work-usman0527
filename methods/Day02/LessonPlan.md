@@ -111,3 +111,4 @@ Can the following numbers make triangles?
 
 ### Lesson Resources
 https://replit.com/@Joel_AndrewAndr/cohort-3-summer-work-JABianchi#programming/pre/5/Methods.java
+https://www.geogebra.org/m/Hy8zCWJh
