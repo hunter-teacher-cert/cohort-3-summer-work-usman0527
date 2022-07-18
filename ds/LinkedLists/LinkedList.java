@@ -1,3 +1,6 @@
+/*** As of Monday, July 18...To be continued **/
+
+
 import java.io.*;
 import java.util.*;
 
@@ -58,6 +61,24 @@ public class LinkedList{
     return walker.getData();
   }
 
+  public Node get_Helper(int index)
+  {
+    Node walker = head;
+    for (int i = 0; i < index; i++)
+      {
+        if (walker == null || index < 0)
+        {
+          return null;
+        }
+        else
+        {
+          walker = walker.getNext();
+        }
+      }
+    return walker;
+  }
+  
+
   /**
   Return a string representation of the list
   */
@@ -85,8 +106,6 @@ public class LinkedList{
         counter++;
       }
 
-
-
     return counter;
   }
 
@@ -103,7 +122,20 @@ public class LinkedList{
   add(1,"z") results in:
   "a"-> "z" -> "b" -> "c" -> "d"
   */
-  public void add(int index, String value){
+  public void add(int index, String value)
+  {
+    if (index == 0) // if in the beginning head node
+    {
+      this.add(value);
+      return;
+    }
+    else if (index == this.size()) // this is the last node
+    {  
+       Node n = get_Helper(index - 1);
+       Node p = new Node (value);
+       n.setNext(p);
+      
+    }
 
   }
 
