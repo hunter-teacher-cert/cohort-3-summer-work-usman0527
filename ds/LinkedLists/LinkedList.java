@@ -131,10 +131,17 @@ public class LinkedList{
     }
     else if (index == this.size()) // this is the last node
     {  
-       Node n = get_Helper(index - 1);
-       Node p = new Node (value);
-       n.setNext(p);
-      
+       Node previous = get_Helper(index - 1);
+       Node n = new Node (value);
+       previous.setNext(n);
+    }
+    else
+    {
+      Node previous = get_Helper(index - 1);//created variable for previous
+      Node n = new Node (value);//created variable for object that we are adding
+      Node next = get_Helper(index);//created variable for the next node
+      n.setNext(next);//set n to point at next variable
+      previous.setNext(n); // set previous to point at n variable
     }
 
   }
@@ -148,8 +155,21 @@ public class LinkedList{
   "a"->"b"->"c"->"d"->"e"
   indexOf("d") would return 3 since "d" is at location 3.
   */
-  public int indexOf(String value){
-    return 0;
+  public int indexOf(String value)
+  {
+    Node walker = head;
+    int counter = 0;
+    while (walker != null)
+      {
+        if (walker.getData() != value)
+        {
+          walker = walker.getNext();
+          counter++;
+        }
+        else
+          return counter;
+      }
+    return -1;
   }
 
 
