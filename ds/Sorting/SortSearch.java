@@ -22,7 +22,6 @@ Search Project:
 */
 
 public class SortSearch{
-
     /* Sort project starts here */
     
     /* Instance Variables */
@@ -52,8 +51,6 @@ public class SortSearch{
 	    return this.data.get(index);
     }
     
-
-
     /*
       return the index of the smallest data idem from index start to the end
       of the ArrayList. If there are multiple of the smallest value,
@@ -78,12 +75,9 @@ public class SortSearch{
               {
                 smallIndex = i;
               }
-                
             }
-	
 	      return smallIndex;
       }
-
 
     /**
        Implement the selection sort algorithm by sorting the ArrayList
@@ -93,8 +87,6 @@ public class SortSearch{
        0 to the end of the ArrayList.
          For each index, find the smallest from that Location
 	 to the end of the array and swap it with that index.
-	 
-       
     */
     public void sort()
       {
@@ -107,13 +99,9 @@ public class SortSearch{
             //give data at i the data of the smallest index
             data.set(i, data.get(smallIndex));
             //give data the value at smallest index
-            data.set(smallIndex, temp);
-                    
+            data.set(smallIndex, temp);         
           }
-
       }
-
-
 
     /* Search project starts here */
     
@@ -125,9 +113,13 @@ public class SortSearch{
        This algorithm works on any ArrayList.
     */
     public int linearSearch(int value){
-	
-	
-	return 0; // replace this return
+	    //go through the array list
+	    for(int i =0; i < data.size()-1; i++){
+        if(data.get(i)== value){
+          return i; //this will stop the search at the first occurence.
+        }
+      }
+	    return -1; // replace this return
     }
     
     /**
@@ -138,12 +130,33 @@ public class SortSearch{
     public int binarySearch(int value){
 
 	// create assign variables  representing the high, low and middle indices 
+      int high = data.size()-1;
+      int low = 0;
+      int middle = (high + low)/2;
+      
 	// while we're not done:
-	//   if the item is at data.get(middle), return middle
-	//   otherwise, update high, low, and middle
-
-	return 0;
-	    
+      //check for a cross in high and low
+      //ex [1, 3, 5], search for 2
+    while(low < high){
+      //System.out.println("low: " + low + " middle: "+ middle + " high: " + high);
+      //   if the item is at data.get(middle), return middle
+	     if(data.get(middle) == value){
+         return middle;
+       } else {
+      //   otherwise, update high, low, and middle
+          if(data.get(middle) > value){
+            //if middle is greater than value, search lower half
+            high = middle - 1;
+            middle = (high + low)/2; 
+            //low stays the same.
+          } else {
+         //if middle is less than value, search upper half  
+            low = middle + 1;
+            middle = (high + low)/2;
+          }
+       }
+     }
+      return -1; //item not found
     }
     
     /**
@@ -151,26 +164,40 @@ public class SortSearch{
        
        This algorithm only works on sorted ArrayLists.
     */
-
     public int binarySearchRecursive(int value, int lowIndex, int highIndex){
 
-	// refer to class discussion
-	
-	return 0;
-	    
+      // COPY AND PASTED! NEEDS REFACTOR!
+      int tPos = -1; //init return var to flag/signal value
+
+      int mPos = (loPos + hiPos) / 2; //init tracker var for middle position
+      System.out.println("mPos: " + mPos);
+      //exit case. If lo & hi have crossed, target not present
+      if (loPos > hiPos){
+        return -1;
+      } else if (data.get(mPos) == target) {  // target found 
+        return mPos;
+      }
+    // value at mid index higher than target
+      else if (data.get(mPos) > target) {
+        // low should stay the same.
+        // high position should be the middle
+        return binarySearchRecursive(target, loPos, mPos-1);
+      }
+      // value at mid index lower than target
+      else if (data.get(mPos) < target) {
+        //new low position should be middle position
+        //high should stay the same.
+        return binarySearchRecursive(target, mPos+1, hiPos);
+      }
+
+      return tPos;
     }
-    
-	
+    	
     public String toString(){
-	return ""+data;
+	    return ""+data;
     };
 
-
     public void builtinSort(){
-	Collections.sort(data);
-	
+	    Collections.sort(data);
     }
-    
-
-    
 }
