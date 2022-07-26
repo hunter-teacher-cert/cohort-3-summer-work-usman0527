@@ -164,34 +164,34 @@ public class SortSearch{
        
        This algorithm only works on sorted ArrayLists.
     */
-    public int binarySearchRecursive(int value, int lowIndex, int highIndex){
+    // public int binarySearchRecursive(int value, int lowIndex, int highIndex){
 
-      // COPY AND PASTED! NEEDS REFACTOR!
-      int tPos = -1; //init return var to flag/signal value
+    //   // COPY AND PASTED! NEEDS REFACTOR!
+    //   int tPos = -1; //init return var to flag/signal value
 
-      int mPos = (loPos + hiPos) / 2; //init tracker var for middle position
-      System.out.println("mPos: " + mPos);
-      //exit case. If lo & hi have crossed, target not present
-      if (loPos > hiPos){
-        return -1;
-      } else if (data.get(mPos) == target) {  // target found 
-        return mPos;
-      }
-    // value at mid index higher than target
-      else if (data.get(mPos) > target) {
-        // low should stay the same.
-        // high position should be the middle
-        return binarySearchRecursive(target, loPos, mPos-1);
-      }
-      // value at mid index lower than target
-      else if (data.get(mPos) < target) {
-        //new low position should be middle position
-        //high should stay the same.
-        return binarySearchRecursive(target, mPos+1, hiPos);
-      }
+    //   int mPos = (loPos + hiPos) / 2; //init tracker var for middle position
+    //   System.out.println("mPos: " + mPos);
+    //   //exit case. If lo & hi have crossed, target not present
+    //   if (loPos > hiPos){
+    //     return -1;
+    //   } else if (data.get(mPos) == target) {  // target found 
+    //     return mPos;
+    //   }
+    // // value at mid index higher than target
+    //   else if (data.get(mPos) > target) {
+    //     // low should stay the same.
+    //     // high position should be the middle
+    //     return binarySearchRecursive(target, loPos, mPos-1);
+    //   }
+    //   // value at mid index lower than target
+    //   else if (data.get(mPos) < target) {
+    //     //new low position should be middle position
+    //     //high should stay the same.
+    //     return binarySearchRecursive(target, mPos+1, hiPos);
+    //   }
 
-      return tPos;
-    }
+    //   return tPos;
+    // }
     	
     public String toString(){
 	    return ""+data;
@@ -200,4 +200,100 @@ public class SortSearch{
     public void builtinSort(){
 	    Collections.sort(data);
     }
+
+   /* Merge Sort Stuff after here */
+    /**
+       Builds and returns an ArrayList that's already in increasing order.
+       You can use this method to test your merge method.
+    */
+    public ArrayList<Integer> buildIncreasingList(int size)
+    {
+	    ArrayList<Integer>  newlist = new ArrayList<Integer>();
+	    Random r = new Random();
+	    int nextval = r.nextInt(20)+1;
+	    for (int i=0;i<size;i++)
+      {
+	      newlist.add(nextval);
+	      nextval = nextval + r.nextInt(20);
+	    }
+
+	    return newlist;
+	  }
+
+    /**
+       this routine should create and return a new ArrayList of
+       integers and fill it by merging list1 and list2 into the new
+       list.
+       list1 and list2 are already sorted in increasing order.
+       Example:
+       If list1 contains [1,5,17,25]
+       and list2 contains [3,6,10,30,40,50]
+       The new list will contain:
+       [1, 3, 5, 6, 10, 17, 25, 30, 40, 50]
+       
+    */
+       
+  public ArrayList<Integer> merge(ArrayList<Integer> list1, ArrayList<Integer> list2)
+    {
+      ArrayList<Integer> merged = new ArrayList<Integer>();
+      //setting up a comparison about comparing the values
+      //at each time
+      while (list1.size()>0 && list2.size()>0)
+      {
+        if (list1.get(0) < list2.get(0))
+        {
+          merged.add(list1.get(0));
+          list1.remove(0);
+        }
+        else
+        {
+          merged.add(list2.get(0));
+          list2.remove(0);
+        }
+      }
+      while (list1.size()>0)
+      {
+        merged.add(list1.get(0));
+        list1.remove(0);
+      }
+      while (list2.size()>0)
+      {
+        merged.add(list2.get(0));
+        list2.remove(0);
+      }
+      return merged;
+    }
+
+  public ArrayList<Integer> mergeSort(ArrayList<Integer> list1)
+  {
+    ArrayList<Integer> leftSide = new ArrayList<Integer>();
+    ArrayList<Integer> rightSide = new ArrayList<Integer>();
+    if (list1.size() <= 1)
+    {
+      return list1;
+    }
+    int mid = (list1.size()/2);
+    //populate left hand side
+    for (int i = 0; i < mid; i++)
+    {
+      leftSide.add(list1.get(i));
+    }
+    //populate right hand side
+    for (int j = mid; j < list1.size(); j++)
+    {
+       rightSide.add(list1.get(j));
+    }
+
+    leftSide = mergeSort(leftSide);
+    rightSide = mergeSort(rightSide);
+
+    return merge(leftSide, rightSide);
+    
+    //calling mergeSort within itself
+    //left side from 0 to mid - 1
+    //right side from mid to list1.size()
+
+
+  }
+  
 }

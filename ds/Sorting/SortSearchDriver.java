@@ -36,6 +36,34 @@ public class SortSearchDriver {
   // System.out.println(ss.linearSearch(13));
 
       System.out.println(ss.binarySearch(10));
+
+      ArrayList<Integer> a= ss.buildIncreasingList(20);
+	    System.out.println(a);
+
+	// build a second Arralist here
+	    ArrayList<Integer> b = ss.buildIncreasingList(15);
+
+      ArrayList<Integer> list1= ss.buildIncreasingList(5);
+	    System.out.println(list1);
+	
+
+    	// build a second Arralist here
+    	ArrayList<Integer> list2= ss.buildIncreasingList(15);
+    	System.out.println(list2);
+    
+    	ArrayList<Integer> result = ss.merge(list1,list2);
+    	System.out.println(result);
+
+      ArrayList<Integer> data = new ArrayList<Integer>();
+      Random  r = new Random();
+	    for (int i=0;i<15;i++)
+      {  
+	      data.add(r.nextInt(20));
+	    }
+      System.out.println(data);  
+      System.out.println(ss.mergeSort(data));
+    	// test your merge routine here
+
 	      
 
   }
