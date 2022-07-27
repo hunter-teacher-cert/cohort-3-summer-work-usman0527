@@ -1,4 +1,4 @@
-//Collaborators: Usman Ahmed, Ed Hawkins, Adam Riggers, Moo Joon Park
+ //Collaborators: Usman Ahmed, Ben Eckley, Sam Lojacono, and Kirk Martin
 
 import java.io.*;
 import java.util.*;
